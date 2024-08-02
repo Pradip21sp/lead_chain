@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestLeadExcel(FrappeTestCase):
+class TestPageSheet(FrappeTestCase):
 	pass

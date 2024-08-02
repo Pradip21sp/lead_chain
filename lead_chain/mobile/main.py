@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from frappe.utils import cstr, now, today
 from frappe.auth import LoginManager
 from frappe.permissions import has_permission
-from frappe.desk.form.assign_to import add
+from frappe.desk.form.assign_to import add,remove
 from frappe.utils import (
     cstr,
     get_date_str,
@@ -264,6 +264,8 @@ def get_lead(id):
 @frappe.whitelist()
 def assignTo(assign_list, name):
     try:
+
+        toDoancel=frappe.db.set_value("ToDo",{"reference_type":"Lead","reference_name":name,"status":"Open"},"status","Cancelled")
         doc = add({
             "assign_to":assign_list,
             "doctype":"Lead",

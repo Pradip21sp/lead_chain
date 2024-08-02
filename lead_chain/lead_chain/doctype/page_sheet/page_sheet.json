@@ -2,29 +2,37 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{company}-{page_name}",
- "creation": "2024-07-29 12:30:42.532545",
+ "creation": "2024-07-31 12:49:44.297588",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "company",
   "page_name",
+  "column_break_rfnf",
+  "company",
+  "section_break_unfm",
   "sheet_link"
  ],
  "fields": [
+  {
+   "fieldname": "column_break_rfnf",
+   "fieldtype": "Column Break"
+  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Company",
-   "options": "Company",
-   "reqd": 1
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_unfm",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "sheet_link",
-   "fieldtype": "Data",
-   "in_list_view": 1,
+   "fieldtype": "Table",
    "label": "Sheet Link",
-   "reqd": 1
+   "options": "Sheet Link"
   },
   {
    "fieldname": "page_name",
@@ -35,10 +43,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-29 17:46:27.912372",
+ "modified": "2024-08-01 19:37:21.648077",
  "modified_by": "Administrator",
  "module": "Lead_Chain",
- "name": "Lead Excel",
+ "name": "Page Sheet",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [

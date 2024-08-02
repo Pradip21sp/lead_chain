@@ -9,7 +9,7 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 doc_events = {
-    "Lead": {
+    "Page Sheet": {
         "before_save": "lead_chain.fb_lead.lead_be_save",
     },
 }
@@ -137,6 +137,13 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
+scheduler_events = {
+    "cron": {
+        "*/3 * * * *": [
+            "lead_chain.fb_lead.lead_be_save"
+        ]
+    }
+}
 # scheduler_events = {
 # 	"all": [
 # 		"lead_chain.tasks.all"
