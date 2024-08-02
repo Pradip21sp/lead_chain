@@ -394,9 +394,9 @@ def leadList():
     try:
         meta_data={}
         today = datetime.now().strftime('%Y-%m-%d')
-        meta_data['overdue']= get_leads({'custom_follow_up_datetime': ['>', today]})
+        meta_data['overdue']= get_leads({'custom_follow_up_datetime': ['<', today]})
         meta_data['today']=get_leads({'custom_follow_up_datetime': ['=', today]}) 
-        meta_data['upcoming']=get_leads({'custom_follow_up_datetime': ['<', today]})
+        meta_data['upcoming']=get_leads({'custom_follow_up_datetime': ['>', today]})
         meta_data['some_day']=get_leads({'custom_sfollow_up': ['=', 'Some Day']}) 
         gen_response(200, "Lead lists get successfully", meta_data)
     except frappe.PermissionError:

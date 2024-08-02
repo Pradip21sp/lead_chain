@@ -8,11 +8,11 @@ app_license = "mit"
 
 # Includes in <head>
 # ------------------
-doc_events = {
-    "Page Sheet": {
-        "before_save": "lead_chain.fb_lead.lead_be_save",
-    },
-}
+# doc_events = {
+#     "Page Sheet": {
+#         "after_save": "lead_chain.fb_lead.lead_be_save",
+#     },
+# }
 # include js, css files in header of desk.html
 # app_include_css = "/assets/lead_chain/css/lead_chain.css"
 # app_include_js = "/assets/lead_chain/js/lead_chain.js"
@@ -139,11 +139,19 @@ doc_events = {
 
 scheduler_events = {
     "cron": {
-        "*/3 * * * *": [
-            "lead_chain.fb_lead.lead_be_save"
+        "*/2 * * * *": [
+            "lead_chain.fb_lead.create_lead_doc"
         ]
     }
 }
+
+# scheduler_events = {
+#     "cron": {
+#         "*/3 * * * *": [
+#             "lead_chain.fb_lead.pradipok"
+#         ]
+#     }
+# }
 # scheduler_events = {
 # 	"all": [
 # 		"lead_chain.tasks.all"
