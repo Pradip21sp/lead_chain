@@ -139,8 +139,8 @@ app_license = "mit"
 
 scheduler_events = {
     "cron": {
-        "*/2 * * * *": [
-            "lead_chain.fb_lead.create_lead_doc"
+        "*/20 * * * *": [
+            "lead_chain.lead_chain.doctype.fb_lead.create_lead_doc"
         ]
     }
 }

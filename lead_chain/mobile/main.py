@@ -1,7 +1,7 @@
 import json
 import frappe
 from frappe.utils import add_to_date, today, date_diff
-from datetime import datetime 
+from datetime import datetime ,timedelta
 from frappe import _
 from bs4 import BeautifulSoup
 from frappe.utils import cstr, now, today
@@ -388,15 +388,34 @@ def get_leads(filters):
         return []
 
 
-
+# @frappe.whitelist()
+# def leadList():
+#     try:
+#         meta_data={}
+#         today = datetime.now().strftime('%Y-%m-%d')
+#         meta_data['overdue']=get_leads({'custom_sfollow_up': ['!=', 'Today','Tomorrow','3 Days from Now','1 Week from Now','1 Month from Now','Select Custom Date & Time','Some Day']}) 
+#         meta_data['some_day']=get_leads({'custom_sfollow_up': ['=', 'Some Day']})
+#         meta_data['today']=get_leads({'custom_sfollow_up': ['=', 'Today']})
+#         meta_data['upcoming']=get_leads({'custom_sfollow_up': ['=', 'Tomorrow','3 Days from Now','1 Week from Now','1 Month from Now','Select Custom Date & Time']})
+#         gen_response(200, "Lead lists get successfully", meta_data)
+#     except frappe.PermissionError:
+#         return gen_response(500, "Not permitted for Lead")
+#     except Exception as e:
+#         return exception_handel(e)
 @frappe.whitelist()
 def leadList():
     try:
         meta_data={}
-        today = datetime.now().strftime('%Y-%m-%d')
-        meta_data['overdue']= get_leads({'custom_follow_up_datetime': ['<', today]})
-        meta_data['today']=get_leads({'custom_follow_up_datetime': ['=', today]}) 
-        meta_data['upcoming']=get_leads({'custom_follow_up_datetime': ['>', today]})
+        today_start=datetime.now().strftime('%Y-%m-%d 00:00:00')
+        today_end=datetime.now().strftime('%Y-%m-%d 23:59:59')
+
+        today_start_datetime = datetime.strptime(today_start, '%Y-%m-%d %H:%M:%S')
+        next_day_datetime = today_start_datetime + timedelta(days=1)
+        next_day_str = next_day_datetime.strftime('%Y-%m-%d 00:00:00')
+        
+        meta_data['overdue']= get_leads({'custom_follow_up_datetime': ['<', today_start],'custom_sfollow_up': ['!=', 'Some Day']})
+        meta_data['today']=get_leads({'custom_follow_up_datetime': ['between', [today_start,today_end]]}) 
+        meta_data['upcoming']=get_leads({'custom_follow_up_datetime': ['>=', next_day_str]})
         meta_data['some_day']=get_leads({'custom_sfollow_up': ['=', 'Some Day']}) 
         gen_response(200, "Lead lists get successfully", meta_data)
     except frappe.PermissionError:
