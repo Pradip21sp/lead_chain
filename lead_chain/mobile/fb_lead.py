@@ -22,9 +22,7 @@ def get_existing_campaigns():
 def create_lead_doc():
     lead_id_li = get_existing_ids()
     campaign_name_li = get_existing_campaigns()
-
     page_sheet_list = frappe.get_all('Page Sheet', ['name', 'page_name', 'company'])
-
     # Prepare batch lists for bulk insert
     new_campaigns = []
     new_leads = []

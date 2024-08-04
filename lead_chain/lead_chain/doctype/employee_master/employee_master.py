@@ -36,7 +36,7 @@ class EmployeeMaster(Document):
 	
 	
 	def on_trash(self):
-		frappe.delete_doc("User",self.doc_user,force=True)
+		frappe.delete_doc("User",self.email,force=True)
 		# self.delete_company_name_field_from_user_permission()
 		# self.delete_user_name_field_from_user()
 	

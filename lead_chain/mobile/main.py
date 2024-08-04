@@ -289,8 +289,11 @@ def get_lead_masters(name):
         assign_list =frappe.get_list(
             "ToDo", pluck="allocated_to", filters={"reference_type":"Lead","reference_name":name,"status":"open"}
         )
+        fullNameList=[]
+        for i in assign_list:
+            fullNameList.append(frappe.get_value("User",i,"full_name"))
         frappe.msgprint(str(assign_list))
-        meta_data["assign_to"] = ", ".join(assign_list) if assign_list else ""
+        meta_data["assign_to"] = ", ".join(fullNameList) if fullNameList else ""
         gen_response(200, "Lead meta data get successfully", meta_data)
     except frappe.PermissionError:
         return gen_response(500, "Not permitted for Lead")
