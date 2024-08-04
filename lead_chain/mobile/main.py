@@ -407,7 +407,7 @@ def leadList():
     try:
         meta_data={}
         today_start=datetime.now().strftime('%Y-%m-%d 00:00:00')
-        today_end=datetime.now().strftime('%Y-%m-%d 23:59:59')
+        today_end=datetime.now().strftime('%Y-%m-%d 23:59:59') 
 
         today_start_datetime = datetime.strptime(today_start, '%Y-%m-%d %H:%M:%S')
         next_day_datetime = today_start_datetime + timedelta(days=1)
